@@ -16,7 +16,7 @@ var SimpleRouter = function(map){
     // Removes record id from hash_path to match key in routes.
     if (!route) {
       var records = ['/records/location', '/records/relationship']
-      var actions = ['/edit', '/delete', '/resources/add', '/resources/new', '/relationships/new']
+      var actions = ['/edit', '/delete', '/resources/add', '/resources/new', '/resources', '/relationships/new', '/relationships']
       var new_hash_path;
 
       for (var i in records) {
@@ -32,7 +32,6 @@ var SimpleRouter = function(map){
       }
       route = routes[new_hash_path];
       console.log(new_hash_path);
-      console.log(view_url);
     }
 
 
@@ -54,7 +53,6 @@ var SimpleRouter = function(map){
 $(window).on('map:init', function (e) {
   var detail = e.originalEvent ?
                e.originalEvent.detail : e.detail;
-  console.log(detail.map);
   var sr = new SimpleRouter(detail.map);
   window.addEventListener('hashchange', sr.router);
   window.addEventListener('load', sr.router);

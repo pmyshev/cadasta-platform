@@ -34,7 +34,13 @@ class PartyRelationshipEdit(LoginPermissionRequiredMixin,
     permission_denied_message = error_messages.TENURE_REL_UPDATE
 
     def get_success_url(self):
-        return reverse('parties:relationship_detail', kwargs=self.kwargs)
+        return (reverse(
+            'organization:project-dashboard',
+            kwargs={
+                'organization': self.kwargs['organization'],
+                'project': self.kwargs['project']
+            }) + '#/records/relationship/' + self.kwargs['relationship'])
+        # return reverse('parties:relationship_detail', kwargs=self.kwargs)
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -53,7 +59,7 @@ class PartyRelationshipDelete(LoginPermissionRequiredMixin,
     def get_success_url(self):
         kwargs = self.kwargs
         del kwargs['relationship']
-        return reverse('locations:list', kwargs=self.kwargs)
+        return reverse('organization:project-dashboard', kwargs=self.kwargs)
 
 
 class PartyRelationshipResourceNew(LoginPermissionRequiredMixin,

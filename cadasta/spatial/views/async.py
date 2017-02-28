@@ -168,7 +168,7 @@ class LocationDelete(LoginPermissionRequiredMixin,
     def get_success_url(self):
         kwargs = self.kwargs
         del kwargs['location']
-        return reverse('async:locations:list', kwargs=self.kwargs)
+        return reverse('organization:project-dashboard', kwargs=self.kwargs)
 
 
 class LocationResourceAdd(LoginPermissionRequiredMixin,
@@ -229,6 +229,8 @@ class LocationResourceNew(LoginPermissionRequiredMixin,
             })
         return context
 
+    # def get_success_url
+
 
 class TenureRelationshipAdd(LoginPermissionRequiredMixin,
                             mixins.SpatialUnitRelationshipMixin,
@@ -253,15 +255,17 @@ class TenureRelationshipAdd(LoginPermissionRequiredMixin,
         context = super().get_context_data(*args, **kwargs)
         location = context['location']
         context['submit_url'] = reverse(
-            'api:v1:relationship:tenure_rel_create',
+            # 'api:v1:relationship:tenure_rel_create',
+            'async:spatial:relationship_add',
             kwargs={
                 'organization': location.project.organization.slug,
                 'project': location.project.slug,
-                # 'location': location.id
+                'location': location.id
             })
         return context
 
     def get_success_url(self):
+        # return '#/records/location/' + self.kwargs['location']
         return (reverse(
             'organization:project-dashboard',
             kwargs={

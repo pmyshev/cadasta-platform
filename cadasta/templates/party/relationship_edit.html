@@ -10,7 +10,7 @@
   <hr class="border-btm">
   <h3>{% trans "Edit Relationship" %}</h3>
   <div class="panel panel-default">
-    <form method="POST" data-parsley-validate>
+    <form method="POST" id='detail-form' data-parsley-validate>
     {% csrf_token %}
       <div class="panel-body">
         <h4>{% trans "Details" %}</h4>
